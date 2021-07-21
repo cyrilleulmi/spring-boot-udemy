@@ -26,7 +26,7 @@ public class UserController {
     @PutMapping
     public String updateUser()
     {
-        return "delete user called";
+        return "update user called";
     }
 
     @DeleteMapping

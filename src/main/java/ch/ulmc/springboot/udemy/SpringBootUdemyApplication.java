@@ -1,4 +1,4 @@
-package ch.ulmc.springboot.udemy.springbootudemy;
+package ch.ulmc.springboot.udemy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

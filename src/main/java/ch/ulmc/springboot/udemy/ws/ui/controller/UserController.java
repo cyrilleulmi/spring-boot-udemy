@@ -2,6 +2,7 @@ package ch.ulmc.springboot.udemy.ws.ui.controller;
 
 import com.fasterxml.jackson.databind.util.RawValue;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,7 @@ public class UserController {
         return "get user was called with page " + page + " and limit " + limit + " and is sorted " + sort;
     }
 
-    @GetMapping(path = "{userId}")
+    @GetMapping(path = "{userId}", produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
     public UserRest getUser(@PathVariable String userId) {
         UserRest returnValue = new UserRest();
         returnValue.setEmail("obi-wan.kenobi@j.council.cor");

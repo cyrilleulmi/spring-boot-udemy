@@ -1,17 +1,21 @@
 package ch.ulmc.springboot.udemy.ws.ui.controller;
 
-import com.fasterxml.jackson.databind.util.RawValue;
+import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ch.ulmc.springboot.udemy.ws.ui.model.request.UserDetailsRequestModel;
 import ch.ulmc.springboot.udemy.ws.ui.model.response.UserRest;
 
 @RestController
@@ -25,18 +29,24 @@ public class UserController {
     }
 
     @GetMapping(path = "{userId}", produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-    public UserRest getUser(@PathVariable String userId) {
+    public ResponseEntity<UserRest> getUser(@PathVariable String userId) {
         UserRest returnValue = new UserRest();
         returnValue.setEmail("obi-wan.kenobi@j.council.cor");
         returnValue.setFirstName("Obi Wan");
         returnValue.setLastName("Kenobi");
-        returnValue.setUserId("a5c57b45-a875-40ef-8b41-149427eb8d97");
-        return returnValue;
+        returnValue.setUserId(UUID.randomUUID());
+        return new ResponseEntity<UserRest>(returnValue, HttpStatus.OK);
     }
 
-    @PostMapping
-    public String createUser() {
-        return "create user was called";
+    @PostMapping(consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, produces = {
+            MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+    public UserRest createUser(@RequestBody UserDetailsRequestModel userDetails) {
+        UserRest returnValue = new UserRest();
+        returnValue.setEmail(userDetails.getEmail());
+        returnValue.setFirstName(userDetails.getFirstName());
+        returnValue.setLastName(userDetails.getLastName());
+        returnValue.setUserId(UUID.randomUUID());
+        return returnValue;
     }
 
     @PutMapping

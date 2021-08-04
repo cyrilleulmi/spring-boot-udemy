@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ch.ulmc.springboot.udemy.ws.ui.model.request.UpdateUserRequestModel;
 import ch.ulmc.springboot.udemy.ws.ui.model.request.UserDetailsRequestModel;
 import ch.ulmc.springboot.udemy.ws.ui.model.response.UserRest;
 
@@ -33,7 +34,9 @@ public class UserController {
         return "get user was called with page " + page + " and limit " + limit + " and is sorted " + sort;
     }
 
-    @GetMapping(path = "{userId}", produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(
+        path = "{userId}", 
+        produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<UserRest> getUser(@PathVariable UUID userId) {
         UserRest returnValue = users.get(userId);
         if (returnValue != null) {
@@ -43,8 +46,9 @@ public class UserController {
         }
     }
 
-    @PostMapping(consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, produces = {
-            MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+    @PostMapping(
+        consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, 
+        produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
     public UserRest createUser(@Valid @RequestBody UserDetailsRequestModel userDetails) {
         UserRest returnValue = new UserRest();
         returnValue.setEmail(userDetails.getEmail());
@@ -55,9 +59,19 @@ public class UserController {
         return returnValue;
     }
 
-    @PutMapping
-    public String updateUser() {
-        return "update user called";
+    @PutMapping(
+        path = "{userId}", 
+        consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, 
+        produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+    public ResponseEntity<UserRest> updateUser(@PathVariable UUID userId, @Valid @RequestBody UpdateUserRequestModel userDetails) {
+        UserRest user = users.get(userId);
+        if (user != null) {
+            user.setFirstName(userDetails.getFirstName());
+            user.setLastName(userDetails.getLastName());
+            return new ResponseEntity<UserRest>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
     }
 
     @DeleteMapping

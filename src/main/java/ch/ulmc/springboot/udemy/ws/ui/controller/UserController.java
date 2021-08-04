@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ch.ulmc.springboot.udemy.ws.exception.NoSuchUserException;
 import ch.ulmc.springboot.udemy.ws.ui.model.request.UpdateUserRequestModel;
 import ch.ulmc.springboot.udemy.ws.ui.model.request.UserDetailsRequestModel;
 import ch.ulmc.springboot.udemy.ws.ui.model.response.UserRest;
@@ -46,7 +47,7 @@ public class UserController {
         if (returnValue != null) {
             return new ResponseEntity<UserRest>(returnValue, HttpStatus.OK);
         } else {
-            return new ResponseEntity<UserRest>(HttpStatus.NOT_FOUND);
+            throw new NoSuchUserException("There is no user with the userId " + userId.toString());
         }
     }
 
@@ -74,7 +75,7 @@ public class UserController {
             user.setLastName(userDetails.getLastName());
             return new ResponseEntity<UserRest>(user, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new NoSuchUserException("There is no user with the userId " + userId.toString());
         }
     }
 
@@ -84,7 +85,7 @@ public class UserController {
             this.users.remove(userId);
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new NoSuchUserException("There is no user with the userId " + userId.toString());
         }
     }
 }

@@ -1,6 +1,5 @@
 package ch.ulmc.springboot.udemy.ws.exception;
 
-import java.net.http.HttpHeaders;
 import java.util.Date;
 
 import org.springframework.http.HttpStatus;
@@ -19,14 +18,8 @@ public class AppExceptionsHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ex, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(value = {NullPointerException.class})
-    public ResponseEntity<Object> handleNullPointerException(NullPointerException ex, WebRequest request) {
-        CustomErrorMessage errorMessage = new CustomErrorMessage(new Date(), ex.getLocalizedMessage());
-        return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    @ExceptionHandler(value = {NoSuchUserException.class})
-    public ResponseEntity<Object> handleNoSuchUserException(NoSuchUserException ex, WebRequest request) {
+    @ExceptionHandler(value = {NullPointerException.class, NoSuchUserException.class})
+    public ResponseEntity<Object> handleSpecificException(Exception ex, WebRequest request) {
         CustomErrorMessage errorMessage = new CustomErrorMessage(new Date(), ex.getLocalizedMessage());
         return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
     }

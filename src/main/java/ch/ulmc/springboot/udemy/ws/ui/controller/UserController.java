@@ -29,8 +29,12 @@ public class UserController {
     HashMap<UUID, UserRest> users = new HashMap<UUID, UserRest>(); 
 
     @GetMapping()
-    public String getUsers(@RequestParam(value = "page", defaultValue = "1") int page,
-            @RequestParam(value = "limit") int limit, @RequestParam(value = "sort", required = false) String sort) {
+    public String getUsers(
+        @RequestParam(value = "page", defaultValue = "1") int page,
+        @RequestParam(value = "limit") int limit, @RequestParam(value = "sort", required = false) String sort) {
+        
+        String text = null;
+        text.length();
         return "get user was called with page " + page + " and limit " + limit + " and is sorted " + sort;
     }
 

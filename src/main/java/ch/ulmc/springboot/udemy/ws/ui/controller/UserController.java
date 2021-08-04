@@ -42,7 +42,7 @@ public class UserController {
         if (returnValue != null) {
             return new ResponseEntity<UserRest>(returnValue, HttpStatus.OK);
         } else {
-            return new ResponseEntity<UserRest>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<UserRest>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -70,12 +70,17 @@ public class UserController {
             user.setLastName(userDetails.getLastName());
             return new ResponseEntity<UserRest>(user, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping
-    public String deleteUser() {
-        return "delete user called";
+    @DeleteMapping(path = "{userId}")
+    public ResponseEntity<?> deleteUser(@PathVariable UUID userId) {
+        if (this.users.containsKey(userId)) {
+            this.users.remove(userId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

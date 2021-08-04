@@ -1,5 +1,6 @@
 package ch.ulmc.springboot.udemy.ws.ui.controller;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 import javax.validation.Valid;
@@ -24,6 +25,8 @@ import ch.ulmc.springboot.udemy.ws.ui.model.response.UserRest;
 @RequestMapping("users")
 public class UserController {
 
+    HashMap<UUID, UserRest> users = new HashMap<UUID, UserRest>(); 
+
     @GetMapping()
     public String getUsers(@RequestParam(value = "page", defaultValue = "1") int page,
             @RequestParam(value = "limit") int limit, @RequestParam(value = "sort", required = false) String sort) {
@@ -31,13 +34,13 @@ public class UserController {
     }
 
     @GetMapping(path = "{userId}", produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<UserRest> getUser(@PathVariable String userId) {
-        UserRest returnValue = new UserRest();
-        returnValue.setEmail("obi-wan.kenobi@j.council.cor");
-        returnValue.setFirstName("Obi Wan");
-        returnValue.setLastName("Kenobi");
-        returnValue.setUserId(UUID.randomUUID());
-        return new ResponseEntity<UserRest>(returnValue, HttpStatus.OK);
+    public ResponseEntity<UserRest> getUser(@PathVariable UUID userId) {
+        UserRest returnValue = users.get(userId);
+        if (returnValue != null) {
+            return new ResponseEntity<UserRest>(returnValue, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<UserRest>(HttpStatus.NO_CONTENT);
+        }
     }
 
     @PostMapping(consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, produces = {
@@ -48,6 +51,7 @@ public class UserController {
         returnValue.setFirstName(userDetails.getFirstName());
         returnValue.setLastName(userDetails.getLastName());
         returnValue.setUserId(UUID.randomUUID());
+        users.put(returnValue.getUserId(), returnValue);
         return returnValue;
     }
 

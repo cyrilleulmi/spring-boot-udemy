@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.ulmc.springboot.udemy.ws.exception.NoSuchUserException;
+import ch.ulmc.springboot.udemy.ws.service.UserService;
 import ch.ulmc.springboot.udemy.ws.ui.model.request.UpdateUserRequestModel;
 import ch.ulmc.springboot.udemy.ws.ui.model.request.UserDetailsRequestModel;
 import ch.ulmc.springboot.udemy.ws.ui.model.response.UserRest;
@@ -28,6 +30,9 @@ import ch.ulmc.springboot.udemy.ws.ui.model.response.UserRest;
 public class UserController {
 
     HashMap<UUID, UserRest> users = new HashMap<UUID, UserRest>(); 
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping()
     public String getUsers(
@@ -53,11 +58,7 @@ public class UserController {
         consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, 
         produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
     public UserRest createUser(@Valid @RequestBody UserDetailsRequestModel userDetails) {
-        UserRest returnValue = new UserRest();
-        returnValue.setEmail(userDetails.getEmail());
-        returnValue.setFirstName(userDetails.getFirstName());
-        returnValue.setLastName(userDetails.getLastName());
-        returnValue.setUserId(UUID.randomUUID());
+        UserRest returnValue = userService.createUser(userDetails);
         users.put(returnValue.getUserId(), returnValue);
         return returnValue;
     }

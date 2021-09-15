@@ -19,6 +19,16 @@
             "mainClass": "ch.ulmc.springboot.starter.starterapi.StarterApiApplication",
             "projectName": "starter-api",
             "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-PhotoappDiscoveryApplication<photoapp-discovery>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "ch.ulmc.springboot.eureka.photoappdiscovery.PhotoappDiscoveryApplication",
+            "projectName": "photoapp-discovery",
+            "args": ""
         }
     ]
 }

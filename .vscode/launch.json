@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringBootUdemyApplication<spring-boot-udemy>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "ch.ulmc.springboot.udemy.SpringBootUdemyApplication",
+            "projectName": "spring-boot-udemy",
+            "args": ""
+        }
+    ]
+}

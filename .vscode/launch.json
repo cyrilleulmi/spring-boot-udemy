@@ -29,6 +29,16 @@
             "mainClass": "ch.ulmc.springboot.eureka.photoappdiscovery.PhotoappDiscoveryApplication",
             "projectName": "photoapp-discovery",
             "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-UsersApiApplication<users-api>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "ch.ulmc.springboot.api.users.usersapi.UsersApiApplication",
+            "projectName": "users-api",
+            "args": ""
         }
     ]
 }

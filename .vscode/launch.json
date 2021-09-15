@@ -9,6 +9,16 @@
             "mainClass": "ch.ulmc.springboot.udemy.SpringBootUdemyApplication",
             "projectName": "spring-boot-udemy",
             "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-StarterApiApplication<starter-api>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "ch.ulmc.springboot.starter.starterapi.StarterApiApplication",
+            "projectName": "starter-api",
+            "args": ""
         }
     ]
 }

@@ -1,3 +1,6 @@
 {
-    "maven.view": "flat"
+    "maven.view": "flat",
+    "java.project.sourcePaths": [
+        "spring-boot-udemy/src/main"
+    ]
 }

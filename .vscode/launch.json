@@ -39,6 +39,16 @@
             "mainClass": "ch.ulmc.springboot.api.users.usersapi.UsersApiApplication",
             "projectName": "users-api",
             "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AccountManagementApplication<account-management>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "ch.ulmc.springboot.api.account.accountmanagement.AccountManagementApplication",
+            "projectName": "account-management",
+            "args": ""
         }
     ]
 }

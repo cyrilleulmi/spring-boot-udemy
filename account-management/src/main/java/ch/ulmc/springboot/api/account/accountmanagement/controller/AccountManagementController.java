@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/account")
 public class AccountManagementController {
-    @GetMapping("/status")
+    @GetMapping("/status/check")
     public String getStatus() {
         return "account management working";
     }

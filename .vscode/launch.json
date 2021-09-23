@@ -49,6 +49,16 @@
             "mainClass": "ch.ulmc.springboot.api.account.accountmanagement.AccountManagementApplication",
             "projectName": "account-management",
             "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ApiGatewayApplication<api-gateway>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "ch.ulmc.springboot.api.apigateway.ApiGatewayApplication",
+            "projectName": "api-gateway",
+            "args": ""
         }
     ]
 }

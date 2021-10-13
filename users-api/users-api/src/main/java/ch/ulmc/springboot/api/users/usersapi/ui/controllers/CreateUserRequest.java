@@ -5,19 +5,21 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class CreateUserRequest {
     @NotNull
     @Size(min=2)
-    private final String firstName;
+    private String firstName;
     @NotNull
     @Size(min=2)
-    private final String lastName;
+    private String lastName;
     @NotNull
     @Size(min = 8, max = 25)
-    private final String password;
+    private String password;
     @NotNull
     @Email
-    private final String email;
+    private String email;
 }

@@ -5,6 +5,8 @@ import javax.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,10 +33,10 @@ public class UsersController {
     }
     
     @PostMapping
-    public CreateUserResponse createUser(@Valid @RequestBody CreateUserRequest userData) {  
+    public ResponseEntity<CreateUserResponse> createUser(@Valid @RequestBody CreateUserRequest userData) {  
         ModelMapper modelMapper = new ModelMapper();
         UserEntity entity = this.usersService.createUser(userData);
         CreateUserResponse response = modelMapper.map(entity, CreateUserResponse.class);
-        return response;
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

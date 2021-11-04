@@ -18,9 +18,6 @@ public class CreateUserResponse {
     @Size(min=2)
     private String lastName;
     @NotNull
-    @Size(min = 8, max = 25)
-    private String password;
-    @NotNull
     @Email
     private String email;
 }
